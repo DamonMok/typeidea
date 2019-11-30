@@ -66,13 +66,36 @@ class PostAdmin(admin.ModelAdmin):
  	# 编辑页面
 	save_on_top = True
 
-	fields = (
-		('category', 'title'),
-		'desc',
-		'status',
-		'content',
-		'tag',
+	# 限定要展示的字段、字段的顺序
+	# fields = (
+	# 	('category', 'title'),
+	# 	'desc',
+	# 	'status',
+	# 	'content',
+	# 	'tag',
+	# )
+	
+	# 控制页面的布局
+	fieldsets = (
+		('基础配置', {
+			'description':'基础配置描述',
+			'fields': (
+				('title', 'category'),
+				'status',
+			),
+		}),
+		('内容', {
+			'fields': (
+				'desc',
+				'content',
+			),
+		}),
+		('额外信息', {
+			'classes': ('collapse',), # 隐藏/显示
+			'fields': ('tag',),
+		})
 	)
+
 
 	def operator(self, obj):
 		return format_html(
