@@ -96,6 +96,7 @@ class PostAdmin(admin.ModelAdmin):
 		})
 	)
 
+	filter_horizontal = ('tag',) # 多对多控制横竖布局
 
 	def operator(self, obj):
 		return format_html(
