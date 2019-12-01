@@ -76,6 +76,7 @@ class PostAdmin(admin.ModelAdmin):
 	# )
 	
 	# 控制页面的布局
+	
 	fieldsets = (
 		('基础配置', {
 			'description':'基础配置描述',
@@ -113,3 +114,11 @@ class PostAdmin(admin.ModelAdmin):
 	def save_model(self, request, obj, form, change):
 		obj.owner = request.user
 		return super(PostAdmin, self).save_model(request, obj, form, change)
+
+	# 添加自定义的JavaScript和CSS
+	# class Media:
+	# 	css = {
+	# 		'all': ("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", ),
+	# 	}
+
+	# 	js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap/bundle.js', )
