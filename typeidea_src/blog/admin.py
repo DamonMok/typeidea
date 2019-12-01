@@ -5,6 +5,8 @@ from django.utils.html import format_html
 from .models import Post, Category, Tag
 from .adminforms import PostAdminForm
 
+from typeidea_src.custom_site import custom_site
+
 # Register your models here.
 
 class CategoryOwnerFilter(admin.SimpleListFilter):
@@ -24,13 +26,13 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 
 class PostInline(admin.TabularInline):
-	# 在 分类详细页 内置 文章编辑
+	# 在 分类详细页 内置关联数据() 文章编辑
 	fields = ('title', 'desc')
 	extra = 1 # 控制额外多1行
 	model = Post
 
 
-@admin.register(Category)
+@admin.register(Category, site=custom_site)
 class CategoryAdmin(admin.ModelAdmin):
 
 	inlines = [PostInline, ] # 在 分类详细页 内置 文章编辑
@@ -50,7 +52,7 @@ class CategoryAdmin(admin.ModelAdmin):
 		return super(CategoryAdmin, self).save_model(request, obj, form, change)
 
 
-@admin.register(Tag)
+@admin.register(Tag, site=custom_site)
 class TagAdmin(admin.ModelAdmin):
 	list_display = ('name', 'status', 'created_time')
 	fields = ('name', 'status')
@@ -60,7 +62,7 @@ class TagAdmin(admin.ModelAdmin):
 		return super(TagAdmin, self).save_model(request, obj, form, change)	
 
  
-@admin.register(Post)
+@admin.register(Post, site=custom_site)
 class PostAdmin(admin.ModelAdmin):
 
 	# 自定义Form(desc摘要字段)
@@ -118,7 +120,7 @@ class PostAdmin(admin.ModelAdmin):
 	def operator(self, obj):
 		return format_html(
 			'<a href="{}">编辑</a>',
-			reverse('admin:blog_post_change', args=(obj.id,))
+			reverse('cus_admin:blog_post_change', args=(obj.id,))
 		)
 	operator.short_description='操作' # 表头展示名字
 
