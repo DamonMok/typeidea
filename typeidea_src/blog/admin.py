@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from .models import Post, Category, Tag
+from .adminforms import PostAdminForm
 
 # Register your models here.
 
@@ -50,6 +51,10 @@ class TagAdmin(admin.ModelAdmin):
  
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+
+	# 自定义Form(desc摘要字段)
+	form = PostAdminForm
+
 	list_display = [
 		'title', 'category', 'status',
 		'created_time', 'operator', 'owner'
