@@ -4,8 +4,9 @@ from django.utils.html import format_html
 
 from .models import Post, Category, Tag
 from .adminforms import PostAdminForm
-
+from typeidea_src.base_admin import BaseOwnerAdmin
 from typeidea_src.custom_site import custom_site
+
 
 # Register your models here.
 
@@ -33,7 +34,7 @@ class PostInline(admin.TabularInline):
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
 
 	inlines = [PostInline, ] # 在 分类详细页 内置 文章编辑
 
@@ -53,7 +54,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
 	list_display = ('name', 'status', 'created_time')
 	fields = ('name', 'status')
 
@@ -63,7 +64,7 @@ class TagAdmin(admin.ModelAdmin):
 
  
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
 
 	# 自定义Form(desc摘要字段)
 	form = PostAdminForm
@@ -124,14 +125,18 @@ class PostAdmin(admin.ModelAdmin):
 		)
 	operator.short_description='操作' # 表头展示名字
 
+	"""
+	被抽象到BaseownerAdmin
 	def get_queryset(self, request):
-		""" 根据权限展示文章 """
+		# 根据权限展示文章
 		qs = super(PostAdmin, self).get_queryset(request)
 		return qs.filter(owner=request.user)
 
 	def save_model(self, request, obj, form, change):
+		# owner字段 根据当前用户自动填写
 		obj.owner = request.user
 		return super(PostAdmin, self).save_model(request, obj, form, change)
+	"""
 
 	# 添加自定义的JavaScript和CSS
 	# class Media:
