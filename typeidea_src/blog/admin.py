@@ -22,8 +22,19 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 			return queryset.filter(category_id=self.value())
 		return queryset
 
+
+class PostInline(admin.TabularInline):
+	# 在 分类详细页 内置 文章编辑
+	fields = ('title', 'desc')
+	extra = 1 # 控制额外多1行
+	model = Post
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+
+	inlines = [PostInline, ] # 在 分类详细页 内置 文章编辑
+
 	list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count')
 
 	fields = ('name', 'status', 'is_nav')
