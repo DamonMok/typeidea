@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from .models import Post, Tag, Category
+from config.models import SideBar
 
 # Create your views here.
 def post_list(request, category_id=None, tag_id=None):
@@ -20,6 +21,7 @@ def post_list(request, category_id=None, tag_id=None):
 		'category': category,
 		'tag': tag,
 		'post_list': post_list,
+		'sidebars': SideBar.get_all(),
 	}
 	context.update(Category.get_navs())
 

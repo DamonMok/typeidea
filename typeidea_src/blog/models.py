@@ -23,7 +23,7 @@ class Category(models.Model):
 	class Meta:
 		verbose_name = verbose_name_plural = '分类'
 
-
+	# 获取分类导航
 	@classmethod
 	def get_navs(cls):
 		categories = cls.objects.filter(status=cls.STATUS_NORMAL)
