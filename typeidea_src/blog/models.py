@@ -24,7 +24,21 @@ class Category(models.Model):
 		verbose_name = verbose_name_plural = '分类'
 
 
+	@classmethod
+	def get_navs(cls):
+		categories = cls.objects.filter(status=cls.STATUS_NORMAL)
+		nav_categories = []
+		nor_categories = []
+		for cate in categories:
+			if cate.is_nav:
+				nav_categories.append(cate)
+			else:
+				nor_categories.append(cate)
 
+		return {
+			'navs': nav_categories,
+			'categories': nor_categories,
+		}
 
 
 class Tag(models.Model):
@@ -46,6 +60,7 @@ class Tag(models.Model):
 
 	class Meta:
 		verbose_name = verbose_name_plural = '标签'
+
 
 
 
@@ -75,6 +90,7 @@ class Post(models.Model):
 	class Meta:
 		verbose_name = verbose_name_plural = "文章"
 		ordering = ['-id'] # 根据id进行降序排列
+
 
 	@staticmethod
 	def get_by_tag(tag_id):
@@ -106,3 +122,4 @@ class Post(models.Model):
 	def latest_posts(cls):
 		queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
 		return queryset
+
