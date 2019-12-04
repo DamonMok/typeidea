@@ -10,6 +10,7 @@
 	<a href="/category/{{ cate.id }}/">{{ cate.name }}</a>
 	{% endfor %}
 </div>
+
 <hr/>
 
 {% if tag %}
@@ -33,10 +34,12 @@
 {% endfor %}
 </ul>
 
+<hr/>
+
 <div>
 	{% for sidebar in sidebars %}
 		<h4>{{ sidebar.title }}</h4>
-		{{ sidebar.content }}
+		{{ sidebar.content_html }}
 	{% endfor %}
 </div>
 
