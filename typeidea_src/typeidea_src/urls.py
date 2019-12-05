@@ -21,11 +21,11 @@ from config.views import links
 from typeidea_src.custom_site import custom_site
 
 urlpatterns = [
-    path('', post_list),
-    re_path(r'^category/(?P<category_id>\d+)/$', post_list),
-    re_path(r'^tag/(?P<tag_id>\d+)/$', post_list),
-    re_path(r'^post/(?P<post_id>\d+)/$', post_detail),
-    re_path('links/$', links),
-    path('super_admin/', admin.site.urls),
-    path('admin/', custom_site.urls),
+    path('', post_list, name='index'),
+    re_path(r'^category/(?P<category_id>\d+)/$', post_list, name='category-list'),
+    re_path(r'^tag/(?P<tag_id>\d+)/$', post_list, name='tag-list'),
+    re_path(r'^post/(?P<post_id>\d+).html$', post_detail, name='post-detail'),
+    re_path('links/$', links, name='links'),
+    path('super_admin/', admin.site.urls, name='super-admin'),
+    path('admin/', custom_site.urls, name='admin'),
 ]
