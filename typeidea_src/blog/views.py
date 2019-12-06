@@ -7,7 +7,7 @@ from config.models import SideBar
 # Create your views here.
 
 class CommonViewMixin:
-	# 通用基础数据：侧边栏、顶部导航栏
+	# 通用基础数据：侧边栏、导航栏
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context.update({
@@ -36,7 +36,7 @@ class CategoryView(IndexView):
 
 	def get_queryset(self):
 		""" 重写queryset, 根据分类过滤"""
-		query = super().get_queryset()
+		queryset = super().get_queryset()
 		category_id = self.kwargs.get('category_id')
 		return queryset.filter(category_id=category_id)
 
@@ -49,16 +49,17 @@ class TagView(IndexView):
 		context.update({
 			'tag': tag,
 		})
+		return context
 
 	def get_queryset(self):
 		queryset = super().get_queryset()
 		tag_id = self.kwargs.get('tag_id')
-		return queryset.filter(tag_id=tag_id)
+		return queryset.filter(tag__id=tag_id)
 
 
 # 文章详情页
 class PostDetailView(CommonViewMixin, DetailView):
 	queryset = Post.latest_posts()
-	template_name = 'blog/detail.heml'
+	template_name = 'blog/detail.html'
 	context_object_name = 'post'
 	pk_url_kwarg = 'post_id'
