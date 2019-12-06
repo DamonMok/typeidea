@@ -1,0 +1,6 @@
+<ul>
+{% for comment for comments %}
+<li><a href="{% url 'post-detail' comment.target_id %}">{{ post.title }}</a></li>
+{{ comment.nickname }} : {{ comment.content }}
+{{% endfor %}}
+</ul>
