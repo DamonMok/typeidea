@@ -58,6 +58,14 @@ ROOT_URLCONF = 'typeidea_src.urls'
 
 THEME = 'bootstrap'
 
+STATIC_ROOT = '/tmp/static'
+
+STATIC_URL = '/static10/'
+
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'themes', THEME, "static"),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
