@@ -68,7 +68,7 @@ class PostDetailView(CommonViewMixin, DetailView):
 
 # 搜索列表页
 class SearchView(IndexView):
-	def get_context_date(self, **kwargs):
+	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		keyword = self.request.GET.get('keyword')
 		context.update({
