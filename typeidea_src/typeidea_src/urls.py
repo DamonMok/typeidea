@@ -18,7 +18,7 @@ from django.urls import path, re_path
 
 from blog.views import (
     IndexView, CategoryView, TagView,
-    PostDetailView, SearchView
+    PostDetailView, SearchView, AuthorView
 )
 
 from config.views import links
@@ -31,6 +31,7 @@ urlpatterns = [
     re_path(r'^post/(?P<post_id>\d+).html$', PostDetailView.as_view(), name='post-detail'),
     re_path('links/$', links, name='links'),
     re_path(r'search/$', SearchView.as_view(), name='search'),
+    re_path(r'^author/(?P<owner_id>\d+)/$', AuthorView.as_view(), name='author'),
     path('super_admin/', admin.site.urls, name='super-admin'),
     path('admin/', custom_site.urls, name='admin'),
 ]
