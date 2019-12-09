@@ -4,6 +4,13 @@
 
 {% block title %} {{ post.title }} {% endblock %}
 
+<!-- 代码高亮 -->
+{% block extra_head %}
+	<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/googlecode.min.css">
+	<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}	
+
 {% block main %}
 	{% if post %}
 	<h1>{{ post.title }}</h1>
