@@ -26,7 +26,9 @@ from comment.views import CommentView
 
 from typeidea_src.custom_site import custom_site
 
+from django.contrib.sitemaps import views as sitemap_views
 from blog.rss import LatestPostFeed
+from blog.sitemap import PostSitemap
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -41,4 +43,5 @@ urlpatterns = [
     path('admin/', custom_site.urls, name='admin'),
 
     re_path('rss|feed/$', LatestPostFeed(), name='rss'),
+    re_path('sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSitemap}}),
 ]
