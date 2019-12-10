@@ -26,6 +26,8 @@ from comment.views import CommentView
 
 from typeidea_src.custom_site import custom_site
 
+from blog.rss import LatestPostFeed
+
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     re_path(r'^category/(?P<category_id>\d+)/$', CategoryView.as_view(), name='category-list'),
@@ -37,4 +39,6 @@ urlpatterns = [
     re_path(r'^comment/$', CommentView.as_view(), name='comment'),
     path('super_admin/', admin.site.urls, name='super-admin'),
     path('admin/', custom_site.urls, name='admin'),
+
+    re_path('rss|feed/$', LatestPostFeed(), name='rss'),
 ]
