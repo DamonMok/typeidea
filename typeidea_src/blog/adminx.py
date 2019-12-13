@@ -153,8 +153,8 @@ class PostAdmin(BaseOwnerAdmin):
 	# 	return media
 
 
-
-@xadmin.sites.register(LogEntry)
-class LogEntryAdmin(object):
-	list_display = ['object_repr', 'object_id', 'action_flag', 'user',
-		'change_message']
+# Django的Log配置
+# @xadmin.sites.register(LogEntry)
+# class LogEntryAdmin(object):
+# 	list_display = ['object_repr', 'object_id', 'action_flag', 'user',
+# 		'change_message']
