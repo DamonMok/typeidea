@@ -30,6 +30,13 @@ from django.contrib.sitemaps import views as sitemap_views
 from blog.rss import LatestPostFeed
 from blog.sitemap import PostSitemap
 
+import xadmin
+xadmin.autodiscover()
+
+# version模块自动注册需要版本控制的 Model
+from xadmin.plugins import xversion
+xversion.register_models()
+
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     re_path(r'^category/(?P<category_id>\d+)/$', CategoryView.as_view(), name='category-list'),
@@ -40,7 +47,7 @@ urlpatterns = [
     re_path(r'^author/(?P<owner_id>\d+)/$', AuthorView.as_view(), name='author'),
     re_path(r'^comment/$', CommentView.as_view(), name='comment'),
     path('super_admin/', admin.site.urls, name='super-admin'),
-    path('admin/', custom_site.urls, name='admin'),
+    path('admin/', xadmin.site.urls, name='xadmin'),
 
     re_path('rss|feed/$', LatestPostFeed(), name='rss'),
     re_path('sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSitemap}}),
