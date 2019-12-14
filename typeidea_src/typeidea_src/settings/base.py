@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'dal_select2',
 
     'ckeditor',
+    'ckeditor_uploader', 
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -150,3 +151,8 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': 'codesnippet', # 配置代码插件
     },
 }
+
+# 配置 Django-CKEDITOR 上传图片时，服务器接收文件存放的路径
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = "article_images"

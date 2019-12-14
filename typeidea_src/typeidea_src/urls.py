@@ -35,6 +35,10 @@ xadmin.autodiscover()
 
 from .autocomplete import CategoryAutocomplete, TagAutocomplete
 
+from django.conf import settings
+from django.conf.urls import url, include
+from django.conf.urls.static import static
+
 # version模块自动注册需要版本控制的 Model
 from xadmin.plugins import xversion
 xversion.register_models()
@@ -51,10 +55,14 @@ urlpatterns = [
     path('super_admin/', admin.site.urls, name='super-admin'),
     path('admin/', xadmin.site.urls, name='xadmin'),
 
+    # Rss/Map
     re_path('rss|feed/$', LatestPostFeed(), name='rss'),
     re_path('sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSitemap}}),
 
+    # 解决外键加载问题
     path('category-autocomplete/', CategoryAutocomplete.as_view(), name='category-autocomplete'),
     path('tag-autocomplete/',TagAutocomplete.as_view(), name='tag-autocomplete'),
 
-]
+    # 图片上传
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
