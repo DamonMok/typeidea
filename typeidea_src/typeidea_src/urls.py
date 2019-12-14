@@ -33,6 +33,8 @@ from blog.sitemap import PostSitemap
 import xadmin
 xadmin.autodiscover()
 
+from .autocomplete import CategoryAutocomplete, TagAutocomplete
+
 # version模块自动注册需要版本控制的 Model
 from xadmin.plugins import xversion
 xversion.register_models()
@@ -51,4 +53,8 @@ urlpatterns = [
 
     re_path('rss|feed/$', LatestPostFeed(), name='rss'),
     re_path('sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSitemap}}),
+
+    path('category-autocomplete/', CategoryAutocomplete.as_view(), name='category-autocomplete'),
+    path('tag-autocomplete/',TagAutocomplete.as_view(), name='tag-autocomplete'),
+
 ]
