@@ -1,5 +1,6 @@
 from django import forms
 from dal import autocomplete
+from ckeditor.widgets import CKEditorWidget
 
 from .models import Category, Tag, Post
 
@@ -16,6 +17,8 @@ class PostAdminForm(forms.ModelForm):
 		widget=autocomplete.ModelSelect2(url='tag-autocomplete'),
 		label='标签',
 	)
+
+	content = forms.CharField(widget=CKEditorWidget(), label='正文', required=True)
 
 	class Meta:
 		model = Post

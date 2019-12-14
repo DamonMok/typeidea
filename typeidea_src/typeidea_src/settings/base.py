@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'dal',
     'dal_select2',
 
+    'ckeditor',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,3 +139,14 @@ STATIC_URL = '/static/'
 
 XADMIN_TITLE = 'Typeidea 管理后台'
 XADMIN_FOOTER_TITLE = 'power by Damon'
+
+# Django-CKEDITOR富文本编辑器配置
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippet', # 配置代码插件
+    },
+}
