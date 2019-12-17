@@ -61,7 +61,7 @@ urlpatterns = [
 
     # 解决外键加载问题
     path('category-autocomplete/', CategoryAutocomplete.as_view(), name='category-autocomplete'),
-    path('tag-autocomplete/',TagAutocomplete.as_view(), name='tag-autocomplete'),
+    path('tag-autocomplete/', TagAutocomplete.as_view(), name='tag-autocomplete'),
 
     # 图片上传
     path('ckeditor/', include('ckeditor_uploader.urls')),

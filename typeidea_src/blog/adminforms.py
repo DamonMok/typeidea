@@ -12,9 +12,9 @@ class PostAdminForm(forms.ModelForm):
         widget=autocomplete.ModelSelect2(url='category-autocomplete'),
         label='分类',
     )
-    tag = forms.ModelChoiceField(
+    tag = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
-        widget=autocomplete.ModelSelect2(url='tag-autocomplete'),
+        widget=autocomplete.ModelSelect2Multiple(url='tag-autocomplete'),
         label='标签',
     )
 

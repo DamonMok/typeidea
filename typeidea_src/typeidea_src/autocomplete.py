@@ -6,10 +6,10 @@ from blog.models import Category, Tag
 class CategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             return Category.objects.none()
 
-        qs = Category.objects.all()
+        qs = Category.objects.filter(owner=self.request.user)
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
@@ -19,10 +19,10 @@ class CategoryAutocomplete(autocomplete.Select2QuerySetView):
 class TagAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             return Tag.objects.none()
 
-        qs = Tag.objects.all()
+        qs = Tag.objects.filter(owner=self.request.user)
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
