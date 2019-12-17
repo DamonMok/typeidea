@@ -39,6 +39,8 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 
+from blog.apis import post_list, PostList
+
 # version模块自动注册需要版本控制的 Model
 from xadmin.plugins import xversion
 xversion.register_models()
@@ -65,4 +67,9 @@ urlpatterns = [
 
     # 图片上传
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # Rest Framework
+    # path('api/post/', post_list, name='post-list'),
+    path('api/post/', PostList.as_view(), name='post-list')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
