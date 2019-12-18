@@ -51,7 +51,8 @@ from blog.apis import PostViewSet
 from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
-router.register(r'post', PostViewSet)
+router.register(r'post', PostViewSet, base_name='api-post')
+app_name = 'typeidea'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
