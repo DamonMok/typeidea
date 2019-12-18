@@ -15,10 +15,17 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.filter(status=Post.STATUS_NORMAL)
     # permission_classes = [IsAdminUser] # 写入时的权限校验
 
-    """ 重写POST详情接口 """
+    """ 重写 POST详情 接口 """
     def retrieve(self, request, *args, **kwargs):
         self.serializer_class = PostDetailSerializer
         return super().retrieve(request, *args, **kwargs)
+
+    
+    def filter_queryset(self, queryset):
+        category_id = self.request.query_params.get('category')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+        return queryset
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
