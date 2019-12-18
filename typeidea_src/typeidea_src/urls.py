@@ -46,13 +46,13 @@ from xadmin.plugins import xversion
 xversion.register_models()
 
 from rest_framework import routers
-from blog.apis import PostViewSet
+from blog.apis import PostViewSet, CategoryViewSet
 
 from rest_framework.documentation import include_docs_urls
 
 router = routers.DefaultRouter()
-router.register(r'post', PostViewSet, base_name='api-post')
-app_name = 'typeidea'
+router.register(r'post', PostViewSet, base_name='api-post') # 文章列表、详情
+router.register(r'category', CategoryViewSet, base_name='api-category') # 分类列表
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
