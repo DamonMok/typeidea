@@ -78,7 +78,7 @@ STATIC_ROOT = '/tmp/static'
 STATIC_URL = '/static10/'
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'themes', THEME, "static"),
+    os.path.join(BASE_DIR, 'themes', THEME, "static"),
 ]
 
 TEMPLATES = [
@@ -159,3 +159,10 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CKEDITOR_UPLOAD_PATH = "article_images"
 DEFAULT_FILE_STORAGE = 'typeidea_src.storage.WatermarkStorage'
+
+
+# Rest Framework 的分页
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2, # 每页存放多少条数据
+}
