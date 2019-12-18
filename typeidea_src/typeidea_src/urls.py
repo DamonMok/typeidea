@@ -48,6 +48,8 @@ xversion.register_models()
 from rest_framework import routers
 from blog.apis import PostViewSet
 
+from rest_framework.documentation import include_docs_urls
+
 router = routers.DefaultRouter()
 router.register(r'post', PostViewSet)
 
@@ -79,5 +81,7 @@ urlpatterns = [
     # path('api/post/', PostList.as_view(), name='post-list')
     path('api-auth/', include('rest_framework.urls')), # 登录登出
     path('api/', include(router.urls)),
+
+    path('api/docs/', include_docs_urls(title='typeidea apis')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
