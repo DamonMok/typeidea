@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'dal_select2',
 
     'ckeditor',
-    'ckeditor_uploader', 
+    'ckeditor_uploader',
+
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,21 +1,12 @@
-from rest_framework import generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.permissions import IsAdminUser
 
 from .models import Post
 from .serializers import PostSerializer
 
 
-
-
-
-@api_view()
-def post_list(request):
-    posts = Post.objects.filter(status=Post.STATUS_NORMAL)
-    post_serializers = PostSerializer(posts, many=True)
-    return Response(post_serializers.data)
-
-
-class PostList(generics.ListCreateAPIView):
-    queryset = Post.objects.filter(status=Post.STATUS_NORMAL)
+class PostViewSet(viewsets.ModelViewSet):
+    # 继承自 viewsets.ReadOnlyModelViewSet 代表只读
     serializer_class = PostSerializer
+    queryset = Post.objects.filter(status=Post.STATUS_NORMAL)
+    # permission_classes = [IsAdminUser] # 写入时的权限校验
