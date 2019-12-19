@@ -28,6 +28,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
         fields = ['url', 'id', 'title', 'category', 'tag', 'owner', 'created_time']
+        # 文章列表中分别对应文章详情的url
         extra_kwargs = {
             'url': {'view_name': 'api-post-detail'}
         }
@@ -40,13 +41,17 @@ class PostDetailSerializer(PostSerializer):
         fields = ['id', 'title', 'category', 'tag', 'owner', 'content_html', 'created_time']
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
     """ 分类列表 """
     class Meta:
         model = Category
         fields = (
-            'id', 'name', 'created_time',
+            'url', 'id', 'name', 'created_time',
         )
+        # 分类列表中分别对应分类详情的url
+        extra_kwargs = {
+            'url': {'view_name': 'api-category-detail'}
+        }
 
 
 class CategoryDetailSerializer(CategorySerializer):

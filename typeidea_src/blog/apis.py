@@ -21,10 +21,14 @@ class PostViewSet(viewsets.ModelViewSet):
         return super().retrieve(request, *args, **kwargs)
 
 
+class LatestPostViewSet(PostViewSet):
+    queryset = Post.latest_posts()
+
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.filter(status=Category.STATUS_NORMAL)
+    
     def retrieve(self, request, *args, **kwargs):
         self.serializer_class = CategoryDetailSerializer
         return super().retrieve(request, *args, **kwargs)

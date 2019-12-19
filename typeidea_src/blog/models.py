@@ -140,7 +140,7 @@ class Post(models.Model):
     @classmethod
     def latest_posts(cls):
         # 最新文章
-        return cls.objects.filter(status=cls.STATUS_NORMAL)
+        return cls.objects.filter(status=cls.STATUS_NORMAL)[:5]
 
     @classmethod
     def hot_post(cls):
