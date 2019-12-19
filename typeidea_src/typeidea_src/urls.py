@@ -83,6 +83,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), # 登录登出
     path('api/', include(router.urls)),
 
+    # 接口文档
     path('api/docs/', include_docs_urls(title='typeidea apis')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

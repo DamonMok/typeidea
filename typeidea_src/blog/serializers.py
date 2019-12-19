@@ -5,7 +5,7 @@ from .models import Post, Category
 
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.HyperlinkedModelSerializer):
     """ 文章列表 """
     category = serializers.SlugRelatedField(
         read_only=True,
@@ -27,7 +27,10 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'category', 'tag', 'owner', 'created_time']
+        fields = ['url', 'id', 'title', 'category', 'tag', 'owner', 'created_time']
+        extra_kwargs = {
+            'url': {'view_name': 'api-post-detail'}
+        }
 
 
 class PostDetailSerializer(PostSerializer):
